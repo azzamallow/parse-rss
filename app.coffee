@@ -17,7 +17,6 @@ app.use (err, req, res, next) ->
 # connect
 app.get '/', (req, res) ->
   res.send '' unless req.query.feed?
-  limit = 2
 
   feed = []
   request(req.query.feed)
@@ -26,7 +25,7 @@ app.get '/', (req, res) ->
       feed.push this.read()
     )
     .on('end', ->
-      res.send [feed[0], feed[1]]
+      res.send [feed[0], feed[1], feed[2], feed[3], feed[4], feed[5]]
     )
 
 # start
