@@ -18,6 +18,8 @@ app.use (err, req, res, next) ->
 app.get '/', (req, res) ->
   res.send '' unless req.query.feed?
 
+  limit = req.query.limit || 10
+
   feed = []
   request(req.query.feed)
     .pipe(new FeedParser())
@@ -25,7 +27,7 @@ app.get '/', (req, res) ->
       feed.push this.read()
     )
     .on('end', ->
-      res.send [feed[0], feed[1], feed[2], feed[3], feed[4], feed[5]]
+      res.send feed.slice(0, limit)
     )
 
 # start
